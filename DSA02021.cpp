@@ -1,0 +1,72 @@
+#include <bits/stdc++.h>
+#define LL long long
+#define ULL unsigned long long
+#define FOR(i, a, b) for (int i = a; i <= b; i++)
+#define FO(i, a, b) for (int i = a; i < b; i++)
+#define FORD(i, a, b) for (int i = a; i >= b; i--)
+#define fi first
+#define se second
+#define pb push_back
+#define mp make_pair
+#define debug cout << "YES" << endl
+
+using namespace std;
+
+typedef pair<int, int> II;
+const long double PI = 2 * acos(0.0);
+const double eps = 1e-6;
+const int infi = 1e9;
+const LL Linfi = (LL)1e12;
+const LL MOD = 1000000007;
+#define maxn 100005
+
+string s;
+LL pos, a[100];
+
+void init()
+{
+    cin >> s >> pos;
+}
+
+void solve()
+{
+    int n = s.size();
+    int step = 61;
+    s = ' ' + s;
+    a[1] = n;
+    for (int i = 2; i <= 61; i++)
+    {
+        if (a[i - 1] * 2 >= 2e18)
+        {
+            step = i - 1;
+            break;
+        }
+        else
+            a[i] = a[i - 1] * 2;
+    }
+    while (pos > n)
+    {
+        if (a[step] < pos)
+        {
+            long long x = pos - a[step];
+            if (x == 1)
+                pos = a[step - 1];
+            else
+                pos = x - 1;
+        }
+        step--;
+    }
+    cout << s[pos] << endl;
+}
+
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        init();
+        solve();
+        cout << endl;
+    }
+}
